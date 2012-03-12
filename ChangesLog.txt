@@ -1,0 +1,41 @@
+05 março 2012
+   released version 0.0.4 of Snake
+
+     Change log:
+        -Added: Music
+        -Added: Sounds
+        -Updated: Code optmized.
+        -Updated: Less disk space used
+
+28 fevereiro 2012
+   released version 0.0.4 of Snake
+
+     Change log:
+        -Added: High-Score feature
+
+26 fevereiro 2012
+   released version 0.0.4 of Snake
+
+     Change log:
+        -Updated: Code optimized.
+        -Updated: The way how the program read things on the disk
+        -Updated: Use of less space on the disk.
+
+25 fevereiro 2012
+   released version 0.0.1 of Snake
+
+     Change log:
+        -Updated: Code optimized.
+        -Updated: Less hard disk space used.
+        -Added: Window Title.
+
+14 fevereiro 2012
+   released version 0.0.1 of Snake
+
+     Change log:
+        -Added: Score System.
+        -Updated: Fade in/out in every page
+        -Removed: Features that didn't work in options menu.
+        -Added: Added car-crash sound
+        -Added: Icon to the executable
+
