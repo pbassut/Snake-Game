@@ -7,7 +7,7 @@ File:
 Description:
 **/
 
-#include "GamePlay.h"
+#include "main.h"
 
 void game_play()
 {
@@ -22,9 +22,9 @@ void game_play()
                                 create_bitmap(32, 32),
                                 create_bitmap(32, 32)
                                 };
-                                clear_bitmap(snake_head[1]);
-                                clear_bitmap(snake_head[2]);
-                                clear_bitmap(snake_head[3]);
+                                rectfill(snake_head[1], 0, 0, snake_head[1]->w, snake_head[1]->h, PINK);
+                                rectfill(snake_head[2], 0, 0, snake_head[1]->w, snake_head[1]->h, PINK);
+                                rectfill(snake_head[3], 0, 0, snake_head[1]->w, snake_head[1]->h, PINK);
 
     BITMAP *tail            = (BITMAP*)img_datafile[TAIL].dat;
     BITMAP *food_image      = (BITMAP*)img_datafile[NORMAL_FOOD].dat;
@@ -36,7 +36,7 @@ void game_play()
         rotate_sprite(snake_head[i], snake_head[0], 0, 0, itofix(64*i));
 
     fadein(background, 50, 256);
-
+    clock_t seconds = clock();
     while (!key[KEY_ESC])
     {
         #ifdef DEBUG
@@ -63,6 +63,11 @@ void game_play()
         }
 
         draw_sprite(buffer, background, 0, 0);
+
+        if(((double)(clock() - seconds) / CLOCKS_PER_SEC) < player.speed)
+            continue;
+
+        seconds = clock();
 
         player.prev_snake_pos_x[0] = player.pos.x;
         player.prev_snake_pos_y[0] = player.pos.y;
@@ -109,7 +114,5 @@ void game_play()
             return;
         }
         draw_sprite(screen, buffer, 0, 0);
-
-        rest(player.speed);
     }
 }

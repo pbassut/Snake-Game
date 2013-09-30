@@ -7,13 +7,13 @@ File:
 Description:
 **/
 
-#include "Graph_Funcs.h"
+#include "main.h"
 
 void snake_crashed(int points)
 {
-    BITMAP *crashed_img = (BITMAP*)img_datafile[CRASHED_IMG].dat;
+    BITMAP *crashed_img = (BITMAP*)img_datafile[CRASHED].dat;
     FONT *fonte         = (FONT*)fnt_datafile[COMICSANS].dat;
-    SAMPLE *crashed_wav = (SAMPLE*)snd_datafile[CRASHED_WAV].dat;
+    SAMPLE *crashed_wav = (SAMPLE*)snd_datafile[CRASH].dat;
 
     fadein(crashed_img, 50, 256);
     #ifndef DEBUG
@@ -47,10 +47,8 @@ void game_introduction()
     for(i = 0; (i < 2000) && (!key[KEY_ESC]); i++)
     {
         rest(1);
-
         if(i == 1999)
-        fadeout(50, 256);
-
+            fadeout(50, 256);
     }
 
     return;

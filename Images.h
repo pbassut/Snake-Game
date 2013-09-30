@@ -1,20 +1,13 @@
-/**
-Snake-Game:
-A remake of the mobile game from nokia(don't know what model)
-Made by Patrick Farias Bassut Souza <patrickbassut@hotmail.com
-
-File:
-Description:
-**/
-
-#ifndef IMAGES_H
-#define IMAGES_H
+/* Allegro datafile object indexes, produced by grabber v4.2.0, MSVC.s */
+/* Datafile: d:\Programming\Projects\Snake_Game\Data\Images\Images.dat */
+/* Date: Thu Jun 28 02:51:38 2012 */
+/* Do not hand edit! */
 
 #define ARROW                            0        /* BMP  */
 #define BACKGROUND                       1        /* BMP  */
 #define BUTTON_OFF                       2        /* BMP  */
 #define BUTTON_ON                        3        /* BMP  */
-#define CRASHED_IMG                      4        /* BMP  */
+#define CRASHED                          4        /* BMP  */
 #define HEAD                             5        /* BMP  */
 #define HIGH_SCORE                       6        /* BMP  */
 #define MAIN_MENU                        7        /* BMP  */
@@ -24,5 +17,3 @@ Description:
 #define SPEED_FOOD                       11       /* BMP  */
 #define TAIL                             12       /* BMP  */
 
-
-#endif

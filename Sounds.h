@@ -1,17 +1,10 @@
-/**
-Snake-Game:
-A remake of the mobile game from nokia(don't know what model)
-Made by Patrick Farias Bassut Souza <patrickbassut@hotmail.com
-
-File:
-Description:
-**/
-
-#ifndef SOUNDS_H
-#define SOUNDS_H
+/* Allegro datafile object indexes, produced by grabber v4.2.0, MSVC.s */
+/* Datafile: d:\Programming\Projects\Snake_Game\Data\Sounds\Sounds.dat */
+/* Date: Thu Jun 28 04:36:52 2012 */
+/* Do not hand edit! */
 
 #define BG_MUSIC                         0        /* MIDI */
-#define CRASHED_WAV                       1        /* SAMP */
-#define SWALLOW                          2        /* SAMP */
+#define CLICK                            1        /* SAMP */
+#define CRASH                            2        /* SAMP */
+#define SWALLOW                          3        /* SAMP */
 
-#endif

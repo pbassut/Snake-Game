@@ -7,7 +7,7 @@ File:
 Description:
 **/
 
-#include "Algorithms.h"
+#include "main.h"
 
 int qsort_helper_by_score(const void *e1, const void *e2)
 {

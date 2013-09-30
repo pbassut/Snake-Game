@@ -7,7 +7,7 @@ File:
 Description:
 **/
 
-#include "Menus.h"
+#include "main.h"
 
 int main_menu()
 {
@@ -15,6 +15,7 @@ int main_menu()
     BITMAP *main     = (BITMAP*)img_datafile[MAIN_MENU].dat;
     BITMAP *arrow    = (BITMAP*)img_datafile[ARROW].dat;
     MIDI *bg_music   = (MIDI*)snd_datafile[BG_MUSIC].dat;
+    SAMPLE *click      = (SAMPLE*)snd_datafile[CLICK].dat;
 
     while(1)
     {
@@ -44,23 +45,29 @@ int main_menu()
             blit(main, buffer, 0, 0, 0, 0, MAX_X, MAX_Y);
 
             if(((key[KEY_UP]) && (choice > 0)))
+            {
+                play_sample(click, 255, 0, 2000, 0);
                 choice--;
+            }
             if((key[KEY_DOWN]) && (choice < 3))
+            {
+                play_sample(click, 255, 0, 2000, 0);
                 choice++;
+            }
 
             switch(choice)
             {
                 case 0:
-                    draw_sprite(buffer, arrow, 165, 300);
+                    draw_sprite(buffer, arrow, 232, 264);
                     break;
                 case 1:
-                    draw_sprite(buffer, arrow, 190, 355);
+                    draw_sprite(buffer, arrow, 228, 339);
                     break;
                 case 2:
-                    draw_sprite(buffer, arrow, 200, 420);
+                    draw_sprite(buffer, arrow, 278, 411);
                     break;
                 case 3:
-                    draw_sprite(buffer, arrow, 240, 490);
+                    draw_sprite(buffer, arrow, 325, 485);
                     break;
 
             }
@@ -94,48 +101,69 @@ void option_menu(void)
     BITMAP *main        = (BITMAP*)img_datafile[OPTION_MENU].dat;
     BITMAP *arrow       = (BITMAP*)img_datafile[ARROW].dat;
     BITMAP *buffer      = create_bitmap (SCREEN_W, SCREEN_H);
+    BITMAP *onLogo      = (BITMAP*)img_datafile[BUTTON_ON].dat;
+    BITMAP *offLogo      = (BITMAP*)img_datafile[BUTTON_OFF].dat;
     FONT *fonte         = (FONT*)fnt_datafile[COMICSANS].dat;
+    SAMPLE *click      = (SAMPLE*)snd_datafile[CLICK].dat;
+
 
     tConfig new_configuration = game.cur_cfg;
 
     int choice = 0;
-    int arrow_pos_y[7] = {200, 235, 275, 315, 350, 530};
-
+    int arrow_pos_y[7] = {213, 254, 296, 337, 380, 508};
+    int fixed_x = 125;
     fadein(main, 50, 256);
 
-    draw_sprite(buffer, arrow, 10, arrow_pos_y[0]);
+    draw_sprite(buffer, arrow, fixed_x, arrow_pos_y[0]);
 
     bool loop = true;
 
     while(loop)
     {
+        clear_bitmap(buffer);
         draw_sprite(buffer, main, 0, 0);
 
-        textprintf_centre(buffer, fonte, 700, 220, BLUE, "%dx%d", new_configuration.resolutionx, new_configuration.resolutiony);
-        textprintf_centre(buffer, fonte, 680, 250, BLUE, "%s", new_configuration.window_mode?"ON":"OFF");
-        textprintf_centre(buffer, fonte, 680, 285, BLUE, "%s", new_configuration.music?"ON":"OFF");
-        textprintf_centre(buffer, fonte, 680, 320, BLUE, "%s", new_configuration.sound?"ON":"OFF");
-        textprintf_centre(buffer, fonte, 680, 360, BLUE, "%.0f", (new_configuration.volume)/2.55);
+        char *msg = (char*)malloc(sizeof(char)*10);
+        char *aux = (char*)malloc(sizeof(char)*10);;
+        itoa(new_configuration.resolutionx, msg, 10); strcat(msg, "x");
+        itoa(new_configuration.resolutiony, aux, 10);strcat(msg, aux);
+        textout_ex(buffer, fonte, msg, 680, 213, BLUE, PINK);
 
+        if(new_configuration.window_mode) draw_sprite(buffer, onLogo, 680, 254);
+        else draw_sprite(buffer, offLogo, 680, 254);
+
+        if(new_configuration.music) draw_sprite(buffer, onLogo, 680, 296);
+        else draw_sprite(buffer, offLogo, 680, 296);
+
+        if(new_configuration.sound) draw_sprite(buffer, onLogo, 680, 337);
+        else draw_sprite(buffer, offLogo, 680, 337);
+
+        BITMAP *volume = create_bitmap(35, 30); clear_to_color(volume, PINK);
+        itoa(new_configuration.volume/2.55, msg, 10);
+        textout_ex(volume, fonte, msg, 0, 0, BLUE, PINK);
+        draw_sprite(buffer, volume, 680, 380);
 
         if(key[KEY_UP])
         {
+            play_sample(click, 255, 0, 2000, 0);
             choice--;
             if(choice < 0)
                 choice = 5;
-            draw_sprite(buffer, arrow, 10, arrow_pos_y[choice]);
+            draw_sprite(buffer, arrow, fixed_x, arrow_pos_y[choice]);
         }
 
         else if(key[KEY_DOWN])
         {
+            play_sample(click, 255, 0, 2000, 0);
             choice++;
             if(choice > 5)
                 choice = 0;
-            draw_sprite(buffer, arrow, 10, arrow_pos_y[choice]);
+            draw_sprite(buffer, arrow, fixed_x, arrow_pos_y[choice]);
         }
 
         else if(key[KEY_RIGHT] || key[KEY_LEFT] || key[KEY_ENTER])
         {
+            play_sample(click, 255, 0, 2000, 0);
             switch(choice)
             {
                 case 0:
@@ -170,7 +198,7 @@ void option_menu(void)
         else if(key[KEY_ESC])
             break;
 
-        draw_sprite(buffer, arrow, 10, arrow_pos_y[choice]);
+        draw_sprite(buffer, arrow, fixed_x, arrow_pos_y[choice]);
         draw_sprite(screen, buffer, 0, 0);
 
         rest(100);

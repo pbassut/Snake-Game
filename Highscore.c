@@ -7,7 +7,7 @@ File:
 Description:
 **/
 
-#include "Highscore.h"
+#include "main.h"
 
 inline bool check_hscore(int points)
 {
@@ -43,7 +43,7 @@ void show_hscore_list(char *name)
     FONT *fonte = (FONT*)fnt_datafile[COMICSANS].dat;
     BITMAP *high_score = (BITMAP*)img_datafile[HIGH_SCORE].dat;
 
-    fadein(high_score, 10, 50);
+    fadein(high_score, 10, 120);
 
     register int i;
     for(i = 1; i < 10; i++)
@@ -57,16 +57,16 @@ void show_hscore_list(char *name)
             aux[strlen(aux)-1] = '\0';
             strcpy(score_table[i-1].player_name, aux);
 
-            textout_ex(screen, fonte, score_table[i-1].player_name, (SCREEN_W/4.04), (SCREEN_H/12.24)*i, RED, -1);
-            textout_ex(screen, fonte, score, (SCREEN_W/1.83), (SCREEN_H/12.1)*i, RED, -1);
+            textout_ex(screen, fonte, score_table[i-1].player_name, 240, 50+(48*i), RED, -1);
+            textout_ex(screen, fonte, score, 535, 50+(48*i), RED, -1);
         }
         else{
-            textout_ex(screen, fonte, score_table[i-1].player_name, (SCREEN_W/4.04), (SCREEN_H/12.24)*i, WHITE, -1);
-            textout_ex(screen, fonte, score, (SCREEN_W/1.83), (SCREEN_H/12.1)*i, WHITE, -1);
+            textout_ex(screen, fonte, score_table[i-1].player_name, 240, 50+(48*i), WHITE, -1);
+            textout_ex(screen, fonte, score, 535, 50+(48*i), WHITE, -1);
         }
 
     }
-    textout_ex(screen, font, "Press any key to exit", SCREEN_W/2.5, SCREEN_H-50, WHITE, -1);
+    textout_ex(screen, font, "Press any key to exit", 320, SCREEN_H-50, WHITE, -1);
 
     while(!keypressed());
 }
@@ -129,9 +129,9 @@ bool save_scores()
 
     if(hsf != NULL)
     {
-    fwrite(score_table, sizeof(Score), 10, hsf);
-    fclose(hsf);
-    return true;
+        fwrite(score_table, sizeof(Score), 10, hsf);
+        fclose(hsf);
+        return true;
     }
     return false;
 }

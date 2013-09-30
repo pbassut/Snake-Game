@@ -7,7 +7,7 @@ File:
 Description:
 **/
 
-#include "Init_Stuff.h"
+#include "main.h"
 
 
 bool init_allegro()

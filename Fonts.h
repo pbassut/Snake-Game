@@ -10,6 +10,8 @@ Description:
 #ifndef FONTS_H
 #define FONTS_H
 
+#include "main.h"
+
 #define COMICSANS                        0        /* FONT */
 
 #endif

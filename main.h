@@ -14,16 +14,10 @@ File: main.h
 #include <allegro.h>
 #include <string.h>
 #include <time.h>
-#include "Algorithms.h"
-#include "Fonts.h"
-#include "GamePlay.h"
-#include "Graph_Funcs.h"
-#include "Highscore.h"
+#include <stdlib.h>
 #include "Images.h"
-#include "Init_Stuff.h"
-#include "Menus.h"
+#include "Fonts.h"
 #include "Sounds.h"
-#include "version.h"
 
 #define WINDOW_TITLE "Snake Game by Patrick Bassut"
 #define VIDEO_CARD    GFX_AUTODETECT_WINDOWED
@@ -55,8 +49,7 @@ File: main.h
 #define ITSELF_COLLISION 1
 #define FOOD_COLLISION 2
 
-#define INIT_SPEED 200
-
+#define INIT_SPEED (0.3)
 #define START_TAILS 2
 
 
@@ -83,7 +76,7 @@ typedef struct _snake{
     int prev_snake_pos_y[400]; // Váriavel usada para 'guardar' os rastros Y da snake.
     int tails_number;
     int direction;
-    int speed;
+    float speed;
 }tSnake;
 
 typedef struct _game{
@@ -104,13 +97,33 @@ typedef struct _Score
   char player_name[11];
 }Score;
 
-tSnake player;
-tGame game;
-DATAFILE *img_datafile = NULL;
-DATAFILE *snd_datafile = NULL;
-DATAFILE *fnt_datafile = NULL;
-Score score_table[11];
+extern tSnake player;
+extern tGame game;
+extern DATAFILE *img_datafile;
+extern DATAFILE *snd_datafile;
+extern DATAFILE *fnt_datafile;
+extern Score score_table[11];
 
+int qsort_helper_by_score(const void *e1, const void *e2);
+bool check_collision(int collision_type);
+BITMAP *new_food();
 inline void close_game();
+void game_play();
+void snake_crashed(int points);
+void game_introduction();
+void read_string(char *str_to, int x, int y, int size);
+void fadein(BITMAP *bmp_orig, int speed, int until);
+void fadeout(int speed, int until);
+inline bool check_hscore(int points);
+bool load_scores();
+bool save_scores();
+void show_hscore_list(char *name);
+void set_hscore();
+bool init_allegro();
+bool init_game();
+bool init_settings();
+int main_menu();
+void option_menu();
+void apply_settings(tConfig new_config);
 
 #endif
